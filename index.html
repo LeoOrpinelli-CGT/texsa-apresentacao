@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cogtive × Texsa do Brasil — Apresentação Exclusiva</title>
+<link rel="icon" type="image/png" href="Cogtive_Symbol_Off_White.png">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cogtive-blue:#0066FF; --cogtive-blue-dark:#0050CC; --cogtive-blue-light:#3385FF;
+  --cogtive-blue-glow:rgba(0,102,255,0.3);
+  --dark:#0A0E1A; --dark-card:#111827; --dark-surface:#1A2035;
+  --text-primary:#F1F5F9; --text-secondary:#94A3B8; --text-muted:#64748B;
+  --accent-red:#EF4444; --accent-green:#10B981; --accent-orange:#F59E0B;
+  --accent-teal:#14B8A6; --accent-purple:#8B5CF6; --accent-magenta:#EC4899;
+  --accent-yellow:#FBBF24; --accent-cyan:#06B6D4;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--cogtive-blue) var(--dark)}
+body{font-family:'Outfit',sans-serif;background:var(--dark);color:var(--text-primary);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body.locked{overflow:hidden}
+
+/* LOGIN */
+.login-overlay{position:fixed;inset:0;background:radial-gradient(circle at 50% 30%,#0F1E3D 0%,var(--dark) 70%);z-index:10000;display:flex;align-items:center;justify-content:center;padding:2rem}
+.login-card{width:100%;max-width:440px;background:rgba(17,24,39,0.8);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.08);border-radius:24px;padding:3rem 2.5rem;box-shadow:0 30px 80px rgba(0,0,0,0.5),0 0 60px rgba(0,102,255,0.1);position:relative;overflow:hidden}
+.login-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cogtive-blue),var(--accent-teal))}
+.login-logo{height:36px;margin-bottom:2rem;display:block}
+.login-card h2{font-size:1.5rem;font-weight:700;letter-spacing:-0.5px;margin-bottom:0.4rem}
+.login-card .login-sub{font-size:0.9rem;color:var(--text-secondary);margin-bottom:2rem;line-height:1.5}
+.login-form{display:flex;flex-direction:column;gap:1rem}
+.login-field{display:flex;flex-direction:column;gap:0.4rem}
+.login-field label{font-size:0.7rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);font-weight:600}
+.login-field input{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:0.85rem 1rem;color:var(--text-primary);font-family:inherit;font-size:0.95rem;transition:all 0.2s ease}
+.login-field input:focus{outline:none;border-color:var(--cogtive-blue);background:rgba(0,102,255,0.05)}
+.login-submit{background:linear-gradient(135deg,var(--cogtive-blue),var(--cogtive-blue-dark));color:white;border:none;padding:1rem;border-radius:10px;font-family:inherit;font-size:1rem;font-weight:600;cursor:pointer;margin-top:0.5rem;transition:all 0.25s ease;letter-spacing:0.3px}
+.login-submit:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,102,255,0.35)}
+.login-error{color:var(--accent-red);font-size:0.85rem;margin-top:0.5rem;min-height:1.2em;display:flex;align-items:center;gap:0.4rem}
+.login-footer{margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;font-size:0.75rem;color:var(--text-muted)}
+
+/* ADMIN */
+.admin-overlay{position:fixed;inset:0;background:rgba(5,8,15,0.92);backdrop-filter:blur(8px);z-index:10100;display:none;align-items:center;justify-content:center;padding:2rem}
+.admin-overlay.visible{display:flex}
+.admin-card{width:100%;max-width:500px;background:var(--dark-card);border:1px solid var(--cogtive-blue);border-radius:20px;padding:2.5rem;position:relative;box-shadow:0 0 80px rgba(0,102,255,0.2)}
+.admin-card h3{font-size:1.3rem;font-weight:700;margin-bottom:0.3rem;display:flex;align-items:center;gap:0.6rem}
+.admin-card h3 .tag{font-size:0.6rem;padding:0.25rem 0.6rem;background:var(--cogtive-blue);color:white;border-radius:100px;letter-spacing:1.5px;font-weight:700}
+.admin-card .admin-sub{font-size:0.85rem;color:var(--text-secondary);margin-bottom:1.5rem}
+.admin-close{position:absolute;top:1rem;right:1rem;background:transparent;border:1px solid rgba(255,255,255,0.1);width:32px;height:32px;border-radius:50%;color:var(--text-muted);cursor:pointer;font-size:1rem}
+.admin-close:hover{color:var(--text-primary);border-color:var(--text-primary)}
+.admin-section{margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,0.06)}
+.admin-label{font-size:0.7rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--cogtive-blue-light);font-weight:600;margin-bottom:0.6rem}
+.admin-row{display:flex;gap:0.6rem;align-items:center}
+.admin-row input{flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:0.7rem 0.9rem;color:var(--text-primary);font-family:inherit;font-size:0.9rem}
+.admin-row input:focus{outline:none;border-color:var(--cogtive-blue)}
+.admin-btn{background:var(--cogtive-blue);color:white;border:none;padding:0.7rem 1.2rem;border-radius:8px;font-family:inherit;font-weight:600;cursor:pointer;transition:all 0.2s ease;font-size:0.85rem}
+.admin-btn:hover{background:var(--cogtive-blue-dark);transform:translateY(-1px)}
+.admin-btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.15);color:var(--text-secondary)}
+.admin-btn.ghost:hover{border-color:var(--cogtive-blue);color:var(--cogtive-blue-light)}
+.admin-status{font-size:0.8rem;margin-top:0.6rem;min-height:1.2em}
+.admin-status.ok{color:var(--accent-green)}
+.admin-status.err{color:var(--accent-red)}
+.admin-current{display:flex;justify-content:space-between;font-size:0.82rem;background:rgba(0,102,255,0.06);padding:0.7rem 0.9rem;border-radius:8px;border:1px solid rgba(0,102,255,0.15);margin-bottom:0.8rem}
+.admin-current span:first-child{color:var(--text-muted)}
+.admin-current span:last-child{font-family:'JetBrains Mono',monospace;color:var(--cogtive-blue-light);font-weight:600}
+.admin-help{font-size:0.75rem;color:var(--text-muted);margin-top:0.8rem;line-height:1.5}
+.admin-help code{font-family:'JetBrains Mono',monospace;background:rgba(0,102,255,0.1);padding:0.1rem 0.35rem;border-radius:4px;color:var(--cogtive-blue-light)}
+
+#app.hidden{display:none}
+
+/* NAV + PROGRESS */
+.progress-bar{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--cogtive-blue),var(--accent-teal));z-index:900;transition:width 0.1s linear;width:0%}
+nav{position:fixed;top:0;left:0;right:0;z-index:800;padding:1rem 3rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(20px);background:rgba(10,14,26,0.8);border-bottom:1px solid rgba(255,255,255,0.05)}
+.nav-logo{height:32px}
+.nav-label{font-size:0.8rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:2px;font-weight:500}
+.nav-logout{font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);background:transparent;border:1px solid rgba(255,255,255,0.08);padding:0.4rem 0.8rem;border-radius:100px;cursor:pointer;transition:all 0.2s ease;font-family:inherit}
+.nav-logout:hover{color:var(--text-primary);border-color:rgba(255,255,255,0.2)}
+
+/* SECTIONS BASE */
+section{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:6rem 3rem;position:relative}
+.section-inner{max-width:1200px;margin:0 auto;width:100%}
+.section-label{display:inline-flex;align-items:center;gap:0.75rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:3px;color:var(--cogtive-blue-light);font-weight:600;margin-bottom:1rem}
+.section-label::before{content:'';width:30px;height:2px;background:var(--cogtive-blue)}
+.section-title{font-size:clamp(2rem,4vw,3.2rem);font-weight:700;letter-spacing:-1.5px;line-height:1.15;margin-bottom:1rem}
+.section-desc{font-size:1.1rem;color:var(--text-secondary);max-width:720px;line-height:1.7;font-weight:300}
+
+/* ANIMS */
+.reveal{opacity:0;transform:translateY(60px);transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1),transform 0.9s cubic-bezier(0.16,1,0.3,1)}
+.reveal.active{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.15s}
+.reveal-delay-2{transition-delay:0.3s}
+.reveal-delay-3{transition-delay:0.45s}
+.reveal-delay-4{transition-delay:0.6s}
+.reveal-delay-5{transition-delay:0.75s}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-30%;right:-20%;width:800px;height:800px;background:radial-gradient(circle,var(--cogtive-blue-glow) 0%,transparent 70%);animation:pulse-glow 6s ease-in-out infinite}
+@keyframes pulse-glow{0%,100%{opacity:0.4;transform:scale(1)}50%{opacity:0.7;transform:scale(1.1)}}
+.hero-content{max-width:1200px;margin:0 auto;width:100%;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(0,102,255,0.1);border:1px solid rgba(0,102,255,0.3);padding:0.5rem 1.2rem;border-radius:100px;font-size:0.85rem;color:var(--cogtive-blue-light);font-weight:500;margin-bottom:2rem}
+.hero-badge .dot{width:8px;height:8px;background:var(--cogtive-blue);border-radius:50%;animation:dot-pulse 2s ease-in-out infinite}
+@keyframes dot-pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.hero h1{font-size:clamp(2.8rem,6vw,5rem);font-weight:800;line-height:1.05;letter-spacing:-2px;margin-bottom:1.5rem}
+.hero h1 .highlight{background:linear-gradient(135deg,var(--cogtive-blue),var(--accent-teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:1.3rem;color:var(--text-secondary);max-width:780px;line-height:1.6;font-weight:300}
+.hero-metrics{display:flex;gap:3rem;margin-top:4rem;padding-top:3rem;border-top:1px solid rgba(255,255,255,0.08);flex-wrap:wrap}
+.hero-metric .number{font-family:'JetBrains Mono',monospace;font-size:2.6rem;font-weight:700;color:var(--cogtive-blue-light);line-height:1}
+.hero-metric .number .unit{font-size:1.2rem;color:var(--text-muted);font-weight:400}
+.hero-metric .label{font-size:0.78rem;color:var(--text-muted);margin-top:0.5rem;text-transform:uppercase;letter-spacing:1px;max-width:160px}
+
+/* PARTICLES */
+.particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.particle{position:absolute;background:rgba(0,102,255,0.55);border-radius:50%;animation:floatUp 22s infinite linear}
+@keyframes floatUp{0%{transform:translateY(100vh) translateX(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-10vh) translateX(40px);opacity:0}}
+
+/* FLOW */
+.flow-container{margin-top:3rem;position:relative}
+.flow-steps{display:grid;grid-template-columns:repeat(8,1fr);gap:0.6rem;position:relative;z-index:1}
+.flow-step{text-align:center;opacity:0;transform:translateY(30px);transition:all 0.7s cubic-bezier(0.16,1,0.3,1);padding:0.3rem}
+.flow-step.active{opacity:1;transform:translateY(0)}
+.flow-step.flow-no-cogtive{opacity:0}
+.flow-step.flow-no-cogtive.active{opacity:0.45}
+.flow-icon{width:62px;height:62px;margin:0 auto 0.6rem;background:var(--dark-surface);border:2px solid rgba(255,255,255,0.06);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;transition:all 0.4s ease}
+.flow-step.has-cogtive .flow-icon{border-color:var(--cogtive-blue);background:rgba(0,102,255,0.08);box-shadow:0 0 20px rgba(0,102,255,0.12)}
+.flow-step-name{font-weight:600;font-size:0.72rem;margin-bottom:0.2rem;letter-spacing:-0.2px;line-height:1.2}
+.flow-step-detail{font-size:0.62rem;color:var(--text-muted);line-height:1.3}
+.cogtive-wrapper{position:relative;border:2px solid var(--cogtive-blue);border-radius:24px;padding:2.5rem 1rem 1.5rem;margin-top:0.5rem;background:rgba(0,102,255,0.03);box-shadow:0 0 40px rgba(0,102,255,0.08),inset 0 0 40px rgba(0,102,255,0.02)}
+.cogtive-wrapper-label{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--dark);padding:0.3rem 1.5rem;border:2px solid var(--cogtive-blue);border-radius:100px;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--cogtive-blue-light);white-space:nowrap;display:flex;align-items:center;gap:0.5rem}
+.cogtive-wrapper-label img{height:16px}
+.cogtive-wrapper-modules{display:flex;justify-content:center;gap:1rem;margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid rgba(0,102,255,0.15);flex-wrap:wrap}
+.cogtive-wrapper-module{display:flex;align-items:center;gap:0.4rem;padding:0.4rem 1rem;background:rgba(0,102,255,0.1);border:1px solid rgba(0,102,255,0.25);border-radius:100px;font-size:0.75rem;font-weight:600;color:var(--cogtive-blue-light);letter-spacing:0.3px}
+
+/* PROBLEM */
+.problem-section{background:linear-gradient(180deg,var(--dark) 0%,#0F1629 100%)}
+.pain-grid{margin-top:3rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.pain-card{background:var(--dark-surface);border:1px solid rgba(255,255,255,0.06);border-radius:18px;padding:2rem 1.7rem;position:relative;overflow:hidden;transition:all 0.4s ease}
+.pain-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent-red);opacity:0.7}
+.pain-card:hover{transform:translateY(-5px);border-color:rgba(239,68,68,0.25);box-shadow:0 18px 50px rgba(0,0,0,0.3)}
+.pain-num{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--accent-red);font-weight:700;letter-spacing:2px;margin-bottom:0.5rem}
+.pain-card h4{font-size:1.1rem;font-weight:700;margin-bottom:0.8rem;line-height:1.25;letter-spacing:-0.3px}
+.pain-card .pain-desc{font-size:0.85rem;color:var(--text-secondary);line-height:1.55;margin-bottom:1rem}
+.pain-card .pain-impact{font-size:0.78rem;color:var(--text-muted);font-style:italic;padding:0.7rem 0.9rem;background:rgba(239,68,68,0.05);border-radius:8px;border-left:2px solid var(--accent-red);line-height:1.5}
+.pain-highlight{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);color:#FCA5A5;padding:0.2rem 0.5rem;border-radius:6px;font-weight:600;font-family:'JetBrains Mono',monospace;font-size:0.76rem}
+.pain-exec{margin-top:3rem;padding:2rem 2.5rem;background:linear-gradient(135deg,rgba(239,68,68,0.08),rgba(245,158,11,0.06));border:1px solid rgba(239,68,68,0.15);border-radius:18px;display:flex;align-items:flex-start;gap:1.5rem}
+.pain-exec .ex-icon{width:48px;height:48px;background:rgba(239,68,68,0.18);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+.pain-exec h5{font-size:0.78rem;text-transform:uppercase;letter-spacing:2px;color:var(--accent-red);font-weight:700;margin-bottom:0.4rem}
+.pain-exec p{font-size:1rem;color:var(--text-primary);line-height:1.55;font-weight:500}
+.pain-exec p strong{color:#FCA5A5}
+
+/* SOLUTION */
+.cogtive-entry{background:linear-gradient(180deg,#0F1629 0%,var(--dark) 100%)}
+.modules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem}
+.module-card{background:var(--dark-surface);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:2.5rem 2rem;position:relative;overflow:hidden;transition:all 0.5s ease}
+.module-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cogtive-blue),var(--accent-teal));opacity:0;transition:opacity 0.4s ease}
+.module-card:hover::before{opacity:1}
+.module-card:hover{border-color:rgba(0,102,255,0.2);transform:translateY(-8px);box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+.module-number{font-family:'JetBrains Mono',monospace;font-size:3rem;font-weight:800;color:rgba(255,255,255,0.04);position:absolute;top:1rem;right:1.5rem}
+.module-icon{width:56px;height:56px;background:rgba(0,102,255,0.1);border:1px solid rgba(0,102,255,0.2);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.5rem}
+.module-card h3{font-size:1.4rem;font-weight:700;margin-bottom:0.5rem;letter-spacing:-0.5px}
+.module-card .module-sub{font-size:0.8rem;color:var(--cogtive-blue-light);font-weight:500;text-transform:uppercase;letter-spacing:1px;margin-bottom:1rem}
+.module-card p{font-size:0.9rem;color:var(--text-secondary);line-height:1.6;margin-bottom:1.5rem}
+.module-features{display:flex;flex-direction:column;gap:0.6rem}
+.module-feature{display:flex;align-items:flex-start;gap:0.6rem;font-size:0.85rem;color:var(--text-secondary);line-height:1.4}
+.module-feature .check{width:20px;height:20px;background:rgba(16,185,129,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.65rem;color:var(--accent-green);flex-shrink:0;margin-top:0.1rem}
+
+/* TOWER (Torre de Controle) */
+.tower-section{background:linear-gradient(180deg,var(--dark) 0%,#0A1628 100%)}
+.tower-board{margin-top:3rem;background:var(--dark-surface);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:2rem;position:relative}
+.tower-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;padding-bottom:1.2rem;border-bottom:1px solid rgba(255,255,255,0.06)}
+.tower-header h4{font-size:1rem;font-weight:600}
+.tower-header .live{display:inline-flex;align-items:center;gap:0.5rem;font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--accent-green)}
+.tower-header .live::before{content:'';width:8px;height:8px;background:var(--accent-green);border-radius:50%;animation:dot-pulse 1.4s ease-in-out infinite;box-shadow:0 0 8px var(--accent-green)}
+.tower-zone{margin-bottom:1.5rem}
+.tower-zone-label{font-size:0.7rem;text-transform:uppercase;letter-spacing:2px;color:var(--cogtive-blue-light);font-weight:600;margin-bottom:0.7rem;display:flex;align-items:center;gap:0.5rem}
+.tower-zone-label::after{content:'';flex:1;height:1px;background:rgba(0,102,255,0.15);margin-left:0.5rem}
+.tower-grid-envase{display:grid;grid-template-columns:repeat(4,1fr);gap:0.8rem}
+.tower-grid-mix{display:grid;grid-template-columns:repeat(4,1fr);gap:0.8rem}
+.tower-grid-tanks{display:grid;grid-template-columns:repeat(6,1fr);gap:0.8rem}
+.tower-card{background:var(--dark);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:0.9rem 0.85rem;position:relative;overflow:hidden;transition:all 0.3s ease}
+.tower-card:hover{transform:translateY(-2px);border-color:rgba(0,102,255,0.2)}
+.tower-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%}
+.tower-card.st-prod::before{background:var(--accent-green)}
+.tower-card.st-stop::before{background:var(--accent-red)}
+.tower-card.st-setup::before{background:var(--accent-orange)}
+.tower-card.st-micro::before{background:var(--accent-purple)}
+.tower-card.st-idle::before{background:var(--text-muted)}
+.tower-card .tc-name{font-size:0.74rem;font-weight:700;letter-spacing:-0.2px;margin-bottom:0.25rem}
+.tower-card .tc-sku{font-size:0.62rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-bottom:0.5rem;letter-spacing:0.3px}
+.tower-card .tc-metric{font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;color:var(--text-primary);line-height:1}
+.tower-card .tc-metric .u{font-size:0.6rem;color:var(--text-muted);font-weight:400;margin-left:0.2rem}
+.tower-card .tc-status{font-size:0.6rem;text-transform:uppercase;letter-spacing:1.2px;font-weight:700;margin-top:0.4rem}
+.tower-card.st-prod .tc-status{color:var(--accent-green)}
+.tower-card.st-stop .tc-status{color:var(--accent-red)}
+.tower-card.st-setup .tc-status{color:var(--accent-orange)}
+.tower-card.st-micro .tc-status{color:var(--accent-purple)}
+.tower-card.st-idle .tc-status{color:var(--text-muted)}
+.tank-card{background:var(--dark);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:0.7rem 0.6rem;position:relative;overflow:hidden;text-align:center}
+.tank-card .tk-name{font-size:0.62rem;font-weight:600;color:var(--text-secondary);letter-spacing:0.2px;margin-bottom:0.4rem}
+.tank-card .tk-bar{height:60px;width:18px;margin:0 auto 0.4rem;background:rgba(255,255,255,0.04);border-radius:4px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06)}
+.tank-card .tk-fill{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(180deg,var(--cogtive-blue-light),var(--cogtive-blue));transition:height 1.5s cubic-bezier(0.16,1,0.3,1);height:0%}
+.tank-card .tk-val{font-family:'JetBrains Mono',monospace;font-size:0.75rem;font-weight:700;color:var(--cogtive-blue-light)}
+.tower-legend{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid rgba(255,255,255,0.06)}
+.tower-legend-item{display:flex;align-items:center;gap:0.5rem;font-size:0.72rem;color:var(--text-muted)}
+.tower-legend-dot{width:10px;height:10px;border-radius:3px}
+
+/* DASHBOARD */
+.dashboard-section{background:linear-gradient(180deg,var(--dark) 0%,#0A1628 100%)}
+.dash-wrap{margin-top:3rem;background:linear-gradient(135deg,rgba(0,102,255,0.10),rgba(20,184,166,0.06));border:1px solid rgba(0,102,255,0.20);border-radius:24px;padding:2rem;position:relative;overflow:hidden}
+.dash-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cogtive-blue),var(--accent-teal))}
+.dash-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;padding-bottom:1.2rem;border-bottom:1px solid rgba(255,255,255,0.06)}
+.dash-header h4{font-size:1rem;font-weight:600;display:flex;align-items:center;gap:0.6rem}
+.dash-header .live{display:inline-flex;align-items:center;gap:0.5rem;font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--accent-green)}
+.dash-header .live::before{content:'';width:8px;height:8px;background:var(--accent-green);border-radius:50%;animation:dot-pulse 1.4s ease-in-out infinite;box-shadow:0 0 8px var(--accent-green)}
+.dash-shot{border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);box-shadow:0 25px 60px rgba(0,0,0,0.45);position:relative;background:var(--dark)}
+.dash-shot img{display:block;width:100%;height:auto}
+.dash-shot::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 70%,rgba(10,14,26,0.35) 100%);pointer-events:none}
+.dash-features{margin-top:2rem;display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.dash-feat{padding:1.2rem 1.3rem;background:var(--dark-surface);border:1px solid rgba(255,255,255,0.06);border-radius:14px;transition:all 0.3s ease}
+.dash-feat:hover{border-color:rgba(0,102,255,0.25);transform:translateY(-3px)}
+.dash-feat .df-icon{width:36px;height:36px;background:rgba(0,102,255,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.05rem;margin-bottom:0.7rem;color:var(--cogtive-blue-light)}
+.dash-feat h6{font-size:0.86rem;font-weight:700;margin-bottom:0.3rem;letter-spacing:-0.2px}
+.dash-feat p{font-size:0.74rem;color:var(--text-secondary);line-height:1.5}
+
+/* TIMELINE */
+.timeline-detail{margin-top:3rem}
+.timeline-visual{background:var(--dark-surface);border-radius:20px;padding:2.5rem;border:1px solid rgba(255,255,255,0.06);overflow:hidden}
+.timeline-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
+.timeline-header h4{font-size:1rem;font-weight:600}
+.timeline-legend{display:flex;gap:1.2rem;flex-wrap:wrap}
+.timeline-legend-item{display:flex;align-items:center;gap:0.5rem;font-size:0.75rem;color:var(--text-muted)}
+.timeline-legend-dot{width:10px;height:10px;border-radius:3px}
+.timeline-bars{display:flex;flex-direction:column;gap:0.5rem}
+.timeline-row{display:flex;align-items:center;gap:1rem;height:40px}
+.timeline-row-label{width:130px;font-size:0.72rem;font-family:'JetBrains Mono',monospace;color:var(--text-muted);text-align:right;flex-shrink:0;letter-spacing:-0.2px}
+.timeline-row-bar{flex:1;height:28px;background:rgba(255,255,255,0.03);border-radius:6px;overflow:hidden;display:flex}
+.tl-segment{height:100%;transition:width 1.5s cubic-bezier(0.16,1,0.3,1);display:flex;align-items:center;justify-content:center;font-size:0.62rem;font-family:'JetBrains Mono',monospace;font-weight:600;color:white;width:0%}
+.tl-producing{background:var(--accent-green)}
+.tl-stopped{background:var(--accent-red)}
+.tl-setup{background:var(--accent-orange)}
+.tl-micro{background:var(--accent-purple)}
+.timeline-alert{margin-top:1.5rem;padding:1rem 1.5rem;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:12px;display:flex;align-items:center;gap:1rem;font-size:0.85rem;color:var(--text-secondary)}
+.timeline-alert strong{color:var(--accent-red)}
+
+/* OEE */
+.oee-dashboard{margin-top:3rem;display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.oee-gauge{background:var(--dark-surface);border-radius:20px;padding:2rem;border:1px solid rgba(255,255,255,0.06);text-align:center}
+.gauge-container{width:160px;height:160px;margin:0 auto 1.5rem;position:relative}
+.gauge-svg{width:100%;height:100%;transform:rotate(-90deg)}
+.gauge-bg{fill:none;stroke:rgba(255,255,255,0.06);stroke-width:10}
+.gauge-fill{fill:none;stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset 2s cubic-bezier(0.16,1,0.3,1)}
+.gauge-value{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'JetBrains Mono',monospace;font-size:2.2rem;font-weight:700}
+.gauge-label{font-size:0.8rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.5px;font-weight:500}
+.gauge-sublabel{font-size:0.75rem;color:var(--text-secondary);margin-top:0.3rem}
+.oee-formula{margin-top:2.5rem;padding:1.5rem 2rem;background:rgba(0,102,255,0.05);border:1px solid rgba(0,102,255,0.2);border-radius:14px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:0.95rem;color:var(--text-secondary);letter-spacing:0.5px}
+.oee-formula .eq{color:var(--cogtive-blue-light);font-weight:600;font-size:1.1rem}
+
+/* AI VISION */
+.aivision-section{background:linear-gradient(180deg,var(--dark) 0%,#0A1628 100%)}
+.av-pill{display:inline-flex;align-items:center;gap:0.5rem;padding:0.4rem 1rem;background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);border-radius:100px;font-size:0.72rem;font-weight:600;color:var(--accent-purple);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:1rem}
+.av-grid{margin-top:3rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.av-photo-wrap{position:relative;border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);aspect-ratio:16/9;background:var(--dark-surface)}
+.av-photo-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+.av-photo-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(10,14,26,0.85) 100%);pointer-events:none}
+.av-tag{position:absolute;top:1rem;left:1rem;padding:0.35rem 0.8rem;background:rgba(0,102,255,0.9);color:white;font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;border-radius:100px;z-index:2}
+.av-caption{position:absolute;bottom:1rem;left:1rem;right:1rem;z-index:2}
+.av-caption h5{font-size:0.95rem;font-weight:700;color:white;margin-bottom:0.2rem;letter-spacing:-0.3px}
+.av-caption p{font-size:0.75rem;color:var(--text-secondary);line-height:1.4}
+.av-rule{margin-top:2rem;padding:1.5rem 2rem;background:rgba(139,92,246,0.07);border:1px solid rgba(139,92,246,0.2);border-radius:14px;display:flex;gap:1.3rem;align-items:center}
+.av-rule-icon{font-size:1.6rem;width:52px;height:52px;background:rgba(139,92,246,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.av-rule h5{font-size:0.92rem;font-weight:700;color:var(--accent-purple);margin-bottom:0.2rem;letter-spacing:0.3px}
+.av-rule p{font-size:0.85rem;color:var(--text-secondary);line-height:1.55}
+.av-rule p strong{color:var(--text-primary)}
+.av-capabilities{margin-top:2rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.av-cap{padding:1.2rem 1.3rem;background:var(--dark-surface);border:1px solid rgba(255,255,255,0.06);border-radius:14px}
+.av-cap .cap-icon{width:36px;height:36px;background:rgba(139,92,246,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:0.8rem}
+.av-cap h6{font-size:0.88rem;font-weight:700;margin-bottom:0.3rem;letter-spacing:-0.2px}
+.av-cap p{font-size:0.76rem;color:var(--text-secondary);line-height:1.5}
+
+/* ROI */
+.roi-section{background:linear-gradient(180deg,var(--dark) 0%,#0A1628 50%,var(--dark) 100%)}
+.roi-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:3rem;align-items:start}
+.roi-pillars{display:flex;flex-direction:column;gap:1rem}
+.roi-pillar{display:flex;align-items:center;gap:1.2rem;padding:1.3rem 1.5rem;background:var(--dark-surface);border-radius:14px;border:1px solid rgba(255,255,255,0.06);transition:all 0.3s ease}
+.roi-pillar:hover{border-color:rgba(0,102,255,0.2);transform:translateX(4px)}
+.roi-pillar .p-icon{width:44px;height:44px;border-radius:12px;background:rgba(0,102,255,0.12);display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0}
+.roi-pillar h5{font-size:0.92rem;font-weight:700;margin-bottom:0.2rem;letter-spacing:-0.2px}
+.roi-pillar p{font-size:0.78rem;color:var(--text-secondary);line-height:1.45}
+.roi-total{background:linear-gradient(135deg,rgba(0,102,255,0.15),rgba(20,184,166,0.15));border:1px solid rgba(0,102,255,0.3);padding:2.5rem;border-radius:20px;text-align:center;position:sticky;top:100px}
+.roi-total .r-label{font-size:0.78rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:0.8rem;font-weight:600}
+.roi-total .r-headline{font-size:1.3rem;font-weight:700;line-height:1.3;margin-bottom:1.5rem;letter-spacing:-0.3px}
+.roi-total .r-equation{display:flex;align-items:center;justify-content:center;gap:0.6rem;margin:1.5rem 0;flex-wrap:wrap}
+.roi-total .r-term{padding:0.7rem 0.9rem;background:rgba(255,255,255,0.05);border-radius:12px;font-family:'JetBrains Mono',monospace;font-size:0.82rem;font-weight:600}
+.roi-total .r-op{font-size:1.1rem;color:var(--cogtive-blue-light);font-weight:700}
+.roi-total .r-result{padding:0.9rem 1.3rem;background:linear-gradient(135deg,var(--cogtive-blue),var(--accent-teal));border-radius:12px;font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:700;color:white;margin-top:0.6rem}
+.roi-total .r-note{font-size:0.77rem;color:var(--text-muted);line-height:1.5;margin-top:1.3rem;font-style:italic}
+.roi-context{margin-top:2rem;padding:1.4rem 1.6rem;background:rgba(0,102,255,0.05);border:1px dashed rgba(0,102,255,0.25);border-radius:14px;font-size:0.85rem;color:var(--text-secondary);line-height:1.6}
+.roi-context strong{color:var(--cogtive-blue-light)}
+
+/* JOURNEY */
+.journey-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:3rem}
+.journey-step{padding:2rem 1.5rem;position:relative;background:var(--dark-surface);border:1px solid rgba(255,255,255,0.06)}
+.journey-step:first-child{border-radius:20px 0 0 20px}
+.journey-step:last-child{border-radius:0 20px 20px 0}
+.journey-step:not(:last-child){border-right:none}
+.journey-num{font-family:'JetBrains Mono',monospace;font-size:0.85rem;font-weight:700;color:var(--cogtive-blue-light);margin-bottom:0.6rem;letter-spacing:1px}
+.journey-step h4{font-size:1.05rem;font-weight:700;margin-bottom:0.5rem;letter-spacing:-0.3px}
+.journey-step .j-time{font-size:0.7rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:0.8rem;font-weight:600}
+.journey-step p{font-size:0.82rem;color:var(--text-secondary);line-height:1.55}
+
+/* CTA */
+.cta-section{background:radial-gradient(circle at 50% 50%,rgba(0,102,255,0.18) 0%,var(--dark) 60%);text-align:center;min-height:90vh}
+.cta-section .cta-eyebrow{font-size:0.78rem;letter-spacing:3px;text-transform:uppercase;color:var(--cogtive-blue-light);font-weight:700;margin-bottom:1rem}
+.cta-section h2{font-size:clamp(2rem,4.5vw,3.6rem);font-weight:800;letter-spacing:-1.5px;margin-bottom:1rem;line-height:1.1}
+.cta-section h2 .highlight{background:linear-gradient(135deg,var(--cogtive-blue),var(--accent-teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.cta-section p{font-size:1.15rem;color:var(--text-secondary);max-width:680px;margin:0 auto 2.5rem;line-height:1.65;font-weight:300}
+.cta-logos{display:flex;align-items:center;justify-content:center;gap:2.2rem;margin:2.5rem auto 2rem;flex-wrap:wrap}
+.cta-logos img{height:46px;opacity:0.95}
+.cta-logos .x{font-size:1.6rem;font-weight:300;color:var(--text-muted)}
+.cta-logos .lead-mark{font-family:'Outfit',sans-serif;font-weight:800;font-size:1.6rem;letter-spacing:3px;color:var(--text-primary);padding:0.4rem 1rem;border:1px solid rgba(255,255,255,0.15);border-radius:10px}
+.cta-button{display:inline-flex;align-items:center;gap:0.8rem;padding:1.2rem 2.5rem;background:linear-gradient(135deg,#25D366,#1FAE54);color:white;font-weight:700;font-size:1.05rem;letter-spacing:0.3px;text-decoration:none;border-radius:100px;box-shadow:0 18px 50px rgba(37,211,102,0.3);transition:all 0.3s ease}
+.cta-button:hover{transform:translateY(-3px);box-shadow:0 22px 60px rgba(37,211,102,0.45)}
+.cta-button .wpp-icon{width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:1.4rem}
+.cta-exec{margin-top:1.5rem;font-size:0.92rem;color:var(--text-muted)}
+.cta-exec strong{color:var(--text-primary)}
+.cta-foot{margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.06);font-size:0.78rem;color:var(--text-muted);letter-spacing:1px}
+
+/* RESPONSIVE */
+@media (max-width:980px){
+  nav{padding:1rem 1.5rem}
+  section{padding:5rem 1.5rem}
+  .flow-steps{grid-template-columns:repeat(4,1fr);gap:0.5rem}
+  .pain-grid,.modules-grid,.av-grid,.av-capabilities{grid-template-columns:1fr}
+  .roi-grid{grid-template-columns:1fr}
+  .roi-total{position:static}
+  .journey-steps{grid-template-columns:1fr;gap:0.8rem}
+  .journey-step,.journey-step:first-child,.journey-step:last-child{border-radius:14px;border-right:1px solid rgba(255,255,255,0.06)}
+  .oee-dashboard{grid-template-columns:1fr}
+  .tower-grid-envase{grid-template-columns:repeat(2,1fr)}
+  .tower-grid-mix{grid-template-columns:repeat(2,1fr)}
+  .tower-grid-tanks{grid-template-columns:repeat(3,1fr)}
+  .hero-metrics{gap:1.5rem}
+  .hero-metric .number{font-size:2rem}
+  .timeline-row-label{width:90px;font-size:0.62rem}
+  .dash-features{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body class="locked">
+
+<!-- ============ LOGIN ============ -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-card">
+    <img src="Cogtive_Logo_Off_White.png" alt="Cogtive" class="login-logo">
+    <h2>Bem-vindo, Djalma.</h2>
+    <p class="login-sub">Apresentação preparada exclusivamente para a <strong>Texsa do Brasil</strong>. Acesse com seu e-mail corporativo.</p>
+    <form class="login-form" id="loginForm" autocomplete="off">
+      <div class="login-field">
+        <label for="loginEmail">E-mail</label>
+        <input type="email" id="loginEmail" placeholder="quimico@texsadobrasil.com.br" required>
+      </div>
+      <div class="login-field">
+        <label for="loginPwd">Senha</label>
+        <input type="password" id="loginPwd" placeholder="••••••••" required>
+      </div>
+      <div class="login-error" id="loginError"></div>
+      <button type="submit" class="login-submit">Entrar</button>
+    </form>
+    <div class="login-footer">
+      <span class="hint">Cogtive · Pré-Vendas</span>
+      <span>v1.0</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ADMIN PANEL ============ -->
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin-card">
+    <button class="admin-close" id="adminCloseBtn" aria-label="Fechar">✕</button>
+    <h3>Painel Cogtive <span class="tag">ADMIN</span></h3>
+    <p class="admin-sub">Use a senha-mestra para gerenciar o acesso desta apresentação.</p>
+    <div class="admin-section">
+      <div class="admin-label">Autenticação Cogtive</div>
+      <div class="admin-row">
+        <input type="password" id="adminMaster" placeholder="Senha-mestra">
+        <button class="admin-btn" id="adminUnlockBtn">Desbloquear</button>
+      </div>
+      <div class="admin-status" id="adminUnlockStatus"></div>
+    </div>
+    <div class="admin-section" id="adminTools" style="display:none">
+      <div class="admin-label">Senha atual do lead</div>
+      <div class="admin-current"><span>Senha em uso:</span><span id="adminCurrent">—</span></div>
+      <div class="admin-label">Definir nova senha</div>
+      <div class="admin-row">
+        <input type="text" id="adminNewPwd" placeholder="Nova senha do lead">
+        <button class="admin-btn" id="adminSaveBtn">Salvar</button>
+      </div>
+      <div class="admin-status" id="adminSaveStatus"></div>
+      <div class="admin-row" style="margin-top:0.6rem">
+        <button class="admin-btn ghost" id="adminResetBtn">Restaurar padrão</button>
+      </div>
+      <p class="admin-help">Atalho: <code>Ctrl+Shift+A</code>. A senha do lead persiste localmente no navegador deste dispositivo.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ APP ============ -->
+<div id="app" class="hidden">
+
+<div class="progress-bar" id="progressBar"></div>
+
+<nav>
+  <img src="Cogtive_Logo_Off_White.png" alt="Cogtive" class="nav-logo">
+  <span class="nav-label">Texsa do Brasil · Maio 2026</span>
+  <button class="nav-logout" id="logoutBtn">Sair</button>
+</nav>
+
+<div class="particles" id="particles"></div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge reveal"><span class="dot"></span>Apresentação preparada para Djalma · Texsa do Brasil · Maio 2026</div>
+    <h1 class="reveal reveal-delay-1">8 linhas de envase. Quanta capacidade está <span class="highlight">escondida</span> no seu chão?</h1>
+    <p class="hero-sub reveal reveal-delay-2">Djalma, você pediu um supervisório para enxergar o que acontece em tempo real entre matéria-prima, misturadores, tanques de produto acabado e suas 8 linhas de envase. A Cogtive não entrega só um painel — entrega visibilidade integrada do chão de fábrica, com dados que o seu ERP nunca viu.</p>
+    <div class="hero-metrics reveal reveal-delay-3">
+      <div class="hero-metric"><div class="number" data-count="8">0</div><div class="label">Linhas de envase a monitorar</div></div>
+      <div class="hero-metric"><div class="number">+<span data-count="12">0</span><span class="unit">pts</span></div><div class="label">Potencial de ganho em OEE</div></div>
+      <div class="hero-metric"><div class="number">Tempo real</div><div class="label">Visibilidade de chão de fábrica</div></div>
+      <div class="hero-metric"><div class="number">Zero</div><div class="label">Apontamento manual</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FLOW ============ -->
+<section id="flow">
+  <div class="section-inner">
+    <div class="section-label reveal">O Processo</div>
+    <h2 class="section-title reveal reveal-delay-1">Do tanque de matéria-prima ao caminhão.</h2>
+    <p class="section-desc reveal reveal-delay-2">Sua linha de óleos lubrificantes hoje opera com cada etapa em uma "ilha de informação". A Cogtive entra do estoque de MP até a paletização, conectando misturadores, tanques de produto acabado e as 8 envases num só fluxo de dados em tempo real.</p>
+
+    <div class="flow-container">
+      <div class="flow-steps">
+        <div class="flow-step flow-no-cogtive"><div class="flow-icon">🛢️</div><div class="flow-step-name">Recebimento MP</div><div class="flow-step-detail">Bases + aditivos</div></div>
+      </div>
+      <div class="cogtive-wrapper" style="margin-top:1.5rem">
+        <div class="cogtive-wrapper-label"><img src="Cogtive_Symbol_Off_White.png" alt="">Zona de cobertura Cogtive</div>
+        <div class="flow-steps">
+          <div class="flow-step has-cogtive"><div class="flow-icon">🛢️</div><div class="flow-step-name">Tanques MP</div><div class="flow-step-detail">Estoque base + aditivos</div></div>
+          <div class="flow-step has-cogtive"><div class="flow-icon">🔄</div><div class="flow-step-name">Misturadores</div><div class="flow-step-detail">Blendagem</div></div>
+          <div class="flow-step has-cogtive"><div class="flow-icon">🧪</div><div class="flow-step-name">Tanques PA</div><div class="flow-step-detail">Produto acabado</div></div>
+          <div class="flow-step has-cogtive"><div class="flow-icon">⚙️</div><div class="flow-step-name">8 Envases</div><div class="flow-step-detail">Linhas paralelas</div></div>
+          <div class="flow-step has-cogtive"><div class="flow-icon">🏷️</div><div class="flow-step-name">Rotulagem</div><div class="flow-step-detail">Identificação SKU</div></div>
+          <div class="flow-step has-cogtive"><div class="flow-icon">📦</div><div class="flow-step-name">Paletização</div><div class="flow-step-detail">AI Vision</div></div>
+        </div>
+        <div class="cogtive-wrapper-modules">
+          <div class="cogtive-wrapper-module">OEE em Tempo Real</div>
+          <div class="cogtive-wrapper-module">Timeline</div>
+          <div class="cogtive-wrapper-module">Pareto + Smart Setup</div>
+          <div class="cogtive-wrapper-module">AI Vision na paletização</div>
+        </div>
+      </div>
+      <div class="flow-steps" style="grid-template-columns:1fr;margin-top:1.5rem">
+        <div class="flow-step flow-no-cogtive"><div class="flow-icon">🚚</div><div class="flow-step-name">Expedição</div><div class="flow-step-detail">Transporte ao cliente</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROBLEM ============ -->
+<section class="problem-section" id="problem">
+  <div class="section-inner">
+    <div class="section-label reveal" style="color:#FCA5A5">O Desafio</div>
+    <h2 class="section-title reveal reveal-delay-1">As 3 dores que travam a fábrica.</h2>
+    <p class="section-desc reveal reveal-delay-2">Djalma, da conversa com a Deise ficou claro: hoje a operação roda sem um supervisório integrado. Cada uma dessas dores custa horas de capacidade por mês — e o pior, sem ninguém medir.</p>
+
+    <div class="pain-grid">
+      <div class="pain-card reveal reveal-delay-1">
+        <div class="pain-num">DOR 01</div>
+        <h4>Sem visibilidade do que está sendo envasado agora</h4>
+        <p class="pain-desc">As 8 linhas operam em paralelo, mas é impossível saber em tempo real <span class="pain-highlight">qual SKU está em cada uma</span>, qual volume já saiu e qual a produtividade da hora corrente.</p>
+        <p class="pain-impact">"O supervisor liga, pergunta no rádio, anota no caderno. Quando o dado chega, o turno já acabou."</p>
+      </div>
+      <div class="pain-card reveal reveal-delay-2">
+        <div class="pain-num">DOR 02</div>
+        <h4>Misturadores e tanques sem rastreio integrado</h4>
+        <p class="pain-desc">Blendagem, tanques de produto acabado e estoque de MP rodam em sistemas separados. <span class="pain-highlight">Gargalos invisíveis</span> aparecem quando a envase espera tanque livre ou quando a MP não chegou no momento certo.</p>
+        <p class="pain-impact">"O envase para porque o tanque de PA está cheio — e ninguém percebeu a tempo de reprogramar."</p>
+      </div>
+      <div class="pain-card reveal reveal-delay-3">
+        <div class="pain-num">DOR 03</div>
+        <h4>Sem produtividade comparável por máquina</h4>
+        <p class="pain-desc">Como saber qual das 8 envases está performando abaixo do potencial se não há OEE em tempo real? <span class="pain-highlight">Microparadas e variações de velocidade</span> ficam embaixo do radar — e ninguém ataca a pior.</p>
+        <p class="pain-impact">"Sabemos que tem capacidade escondida, mas sem medir não dá para priorizar nada."</p>
+      </div>
+    </div>
+
+    <div class="pain-exec reveal reveal-delay-4">
+      <div class="ex-icon">⚠️</div>
+      <div>
+        <h5>O custo silencioso</h5>
+        <p>Operações químicas de envase têm em média <strong>15 a 25% da capacidade produtiva escondida</strong> em microparadas, variações de velocidade e setups que o ERP não enxerga. Em 8 linhas, isso é muita planta parada — sem ninguém ver.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOLUTION ============ -->
+<section class="cogtive-entry" id="solution">
+  <div class="section-inner">
+    <div class="section-label reveal">A Solução</div>
+    <h2 class="section-title reveal reveal-delay-1">Três módulos que conversam entre si.</h2>
+    <p class="section-desc reveal reveal-delay-2">A Cogtive não é mais um sistema isolado — é a camada que conecta o que já existe e entrega visibilidade do que ainda não é medido. Implementa em paralelo, sem parar máquina, e complementa o seu ERP.</p>
+
+    <div class="modules-grid">
+      <div class="module-card reveal reveal-delay-1">
+        <div class="module-number">01</div>
+        <div class="module-icon">📊</div>
+        <h3>OEE em Tempo Real</h3>
+        <div class="module-sub">Equipamento sob radar 24/7</div>
+        <p>Disponibilidade × Performance × Qualidade — calculado por máquina, por turno, por SKU. Microparadas de menos de 5 minutos passam a ser visíveis.</p>
+        <div class="module-features">
+          <div class="module-feature"><span class="check">✓</span>OEE por envase + por misturador</div>
+          <div class="module-feature"><span class="check">✓</span>Pareto automático de paradas</div>
+          <div class="module-feature"><span class="check">✓</span>Comparativo entre as 8 linhas</div>
+          <div class="module-feature"><span class="check">✓</span>Sem apontamento manual</div>
+        </div>
+      </div>
+
+      <div class="module-card reveal reveal-delay-2">
+        <div class="module-number">02</div>
+        <div class="module-icon">⏱️</div>
+        <h3>Timeline</h3>
+        <div class="module-sub">Cronologia minuto a minuto</div>
+        <p>Veja o que cada máquina fez no último turno — produzindo, parada, microparada, setup, troca de SKU — com duração exata e correlação com o evento que disparou cada parada.</p>
+        <div class="module-features">
+          <div class="module-feature"><span class="check">✓</span>Eventos minuto a minuto por linha</div>
+          <div class="module-feature"><span class="check">✓</span>Smart Setup: tempo de troca medido</div>
+          <div class="module-feature"><span class="check">✓</span>Cadeia de ajuda em tempo real</div>
+          <div class="module-feature"><span class="check">✓</span>Análise de turno em 30 segundos</div>
+        </div>
+      </div>
+
+      <div class="module-card reveal reveal-delay-3">
+        <div class="module-number">03</div>
+        <div class="module-icon">🎯</div>
+        <h3>Pareto + Smart Setup</h3>
+        <div class="module-sub">Análise inteligente das paradas</div>
+        <p>Pareto automático das principais causas de perda por linha e Smart Setup medindo cada troca de SKU. O sistema entrega a lista priorizada do que atacar primeiro em cada envase.</p>
+        <div class="module-features">
+          <div class="module-feature"><span class="check">✓</span>Top 3 causas de parada por linha</div>
+          <div class="module-feature"><span class="check">✓</span>Smart Setup mede e padroniza trocas</div>
+          <div class="module-feature"><span class="check">✓</span>Alertas em tempo real (cadeia de ajuda)</div>
+          <div class="module-feature"><span class="check">✓</span>Acesso web do celular ou da sala de gestão</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DASHBOARD ============ -->
+<section class="dashboard-section" id="dashboard">
+  <div class="section-inner">
+    <div class="section-label reveal">O Painel</div>
+    <h2 class="section-title reveal reveal-delay-1">A Texsa do Brasil em uma tela, no celular ou na sala de gestão.</h2>
+    <p class="section-desc reveal reveal-delay-2">Djalma, este é o dashboard principal da Cogtive — o mesmo painel que o seu supervisor de turno teria no celular e que aparece na TV da sala de gestão. Dados das 8 envases, misturadores e tanques se conversando em tempo real, sem refazer planilha e sem novo ERP.</p>
+
+    <div class="dash-wrap reveal reveal-delay-3">
+      <div class="dash-header">
+        <h4>📊 Cogtive · Texsa do Brasil · Painel Principal</h4>
+        <span class="live">DADOS AO VIVO · Tempo real</span>
+      </div>
+      <div class="dash-shot">
+        <img src="dashboard-principal.png" alt="Painel principal Cogtive">
+      </div>
+      <div class="dash-features" style="grid-template-columns:repeat(3,1fr)">
+        <div class="dash-feat reveal reveal-delay-1">
+          <div class="df-icon">📈</div>
+          <h6>OEE consolidado</h6>
+          <p>Disponibilidade, Performance e Qualidade das 8 envases em uma única tela, atualizado a cada poucos segundos.</p>
+        </div>
+        <div class="dash-feat reveal reveal-delay-2">
+          <div class="df-icon">🎯</div>
+          <h6>Pareto das paradas</h6>
+          <p>Top causas de perda do turno por linha — saiba exatamente o que atacar primeiro em qual envase.</p>
+        </div>
+        <div class="dash-feat reveal reveal-delay-3">
+          <div class="df-icon">🔗</div>
+          <h6>Integração com seu ERP</h6>
+          <p>Complementa o sistema atual — dados de chão de fábrica que o seu ERP não captura, sem migração nem reescrita.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TIMELINE ============ -->
+<section id="timeline-section">
+  <div class="section-inner">
+    <div class="section-label reveal">Timeline em Detalhe</div>
+    <h2 class="section-title reveal reveal-delay-1">O que cada linha fez no último turno, minuto a minuto.</h2>
+    <p class="section-desc reveal reveal-delay-2">Abrindo uma envase específica, a Timeline mostra cada evento — produzindo, parada, microparada, setup — com duração exata e correlação com a causa. Abaixo, exemplo da <strong>ENV-03</strong> ao longo de um turno típico — repare em quanto tempo de microparada e setup aparece que o MES não captura.</p>
+
+    <div class="timeline-detail">
+      <div class="timeline-visual reveal reveal-delay-3">
+        <div class="timeline-header">
+          <h4>📅 ENV-03 · 1L automotivo · Turno A (06:00 → 14:00)</h4>
+          <div class="timeline-legend">
+            <div class="timeline-legend-item"><span class="timeline-legend-dot" style="background:var(--accent-green)"></span>Produzindo</div>
+            <div class="timeline-legend-item"><span class="timeline-legend-dot" style="background:var(--accent-red)"></span>Parada</div>
+            <div class="timeline-legend-item"><span class="timeline-legend-dot" style="background:var(--accent-orange)"></span>Setup</div>
+            <div class="timeline-legend-item"><span class="timeline-legend-dot" style="background:var(--accent-purple)"></span>Microparada</div>
+          </div>
+        </div>
+        <div class="timeline-bars">
+          <div class="timeline-row"><div class="timeline-row-label">06:00 → 07:30</div><div class="timeline-row-bar"><div class="tl-segment tl-producing" data-w="85">1h17</div><div class="tl-segment tl-micro" data-w="15">13m</div></div></div>
+          <div class="timeline-row"><div class="timeline-row-label">07:30 → 09:00</div><div class="timeline-row-bar"><div class="tl-segment tl-producing" data-w="70">1h03</div><div class="tl-segment tl-setup" data-w="22">19m setup</div><div class="tl-segment tl-producing" data-w="8">7m</div></div></div>
+          <div class="timeline-row"><div class="timeline-row-label">09:00 → 10:30</div><div class="timeline-row-bar"><div class="tl-segment tl-producing" data-w="88">1h19</div><div class="tl-segment tl-micro" data-w="12">11m micro</div></div></div>
+          <div class="timeline-row"><div class="timeline-row-label">10:30 → 12:00</div><div class="timeline-row-bar"><div class="tl-segment tl-producing" data-w="60">54m</div><div class="tl-segment tl-stopped" data-w="28">25m parada</div><div class="tl-segment tl-producing" data-w="12">11m</div></div></div>
+          <div class="timeline-row"><div class="timeline-row-label">12:00 → 13:30</div><div class="timeline-row-bar"><div class="tl-segment tl-producing" data-w="92">1h22</div><div class="tl-segment tl-micro" data-w="8">8m</div></div></div>
+          <div class="timeline-row"><div class="timeline-row-label">13:30 → 14:00</div><div class="timeline-row-bar"><div class="tl-segment tl-producing" data-w="75">22m</div><div class="tl-segment tl-micro" data-w="25">8m</div></div></div>
+        </div>
+        <div class="timeline-alert">
+          <strong>⚠️ Descoberta automática:</strong> 47 minutos de microparadas neste turno que o seu MES atual não registra. Em uma operação de 8 envases, isso é potencial de capacidade real recuperável.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OEE ============ -->
+<section id="oee-section">
+  <div class="section-inner">
+    <div class="section-label reveal">OEE em Tempo Real</div>
+    <h2 class="section-title reveal reveal-delay-1">A conta que define o quanto você ainda pode crescer.</h2>
+    <p class="section-desc reveal reveal-delay-2">Para uma operação típica de envase de óleos lubrificantes, o cenário inicial conservador é o seguinte. World Class está em 85%. A média da indústria brasileira é ~60%.</p>
+
+    <div class="oee-dashboard">
+      <div class="oee-gauge reveal reveal-delay-1">
+        <div class="gauge-container">
+          <svg class="gauge-svg" viewBox="0 0 150 150">
+            <circle class="gauge-bg" cx="75" cy="75" r="65"></circle>
+            <circle class="gauge-fill" cx="75" cy="75" r="65" stroke="var(--accent-green)" stroke-dasharray="408.41" stroke-dashoffset="408.41" data-target="65.35"></circle>
+          </svg>
+          <div class="gauge-value" data-count="84">0%</div>
+        </div>
+        <div class="gauge-label">Disponibilidade</div>
+        <div class="gauge-sublabel">Tempo produzindo ÷ tempo planejado</div>
+      </div>
+
+      <div class="oee-gauge reveal reveal-delay-2">
+        <div class="gauge-container">
+          <svg class="gauge-svg" viewBox="0 0 150 150">
+            <circle class="gauge-bg" cx="75" cy="75" r="65"></circle>
+            <circle class="gauge-fill" cx="75" cy="75" r="65" stroke="var(--accent-orange)" stroke-dasharray="408.41" stroke-dashoffset="408.41" data-target="89.85"></circle>
+          </svg>
+          <div class="gauge-value" data-count="78">0%</div>
+        </div>
+        <div class="gauge-label">Performance</div>
+        <div class="gauge-sublabel">Velocidade real ÷ velocidade ideal</div>
+      </div>
+
+      <div class="oee-gauge reveal reveal-delay-3">
+        <div class="gauge-container">
+          <svg class="gauge-svg" viewBox="0 0 150 150">
+            <circle class="gauge-bg" cx="75" cy="75" r="65"></circle>
+            <circle class="gauge-fill" cx="75" cy="75" r="65" stroke="var(--accent-teal)" stroke-dasharray="408.41" stroke-dashoffset="408.41" data-target="20.42"></circle>
+          </svg>
+          <div class="gauge-value" data-count="95">0%</div>
+        </div>
+        <div class="gauge-label">Qualidade</div>
+        <div class="gauge-sublabel">Unidades boas ÷ total produzido</div>
+      </div>
+    </div>
+
+    <div class="oee-formula reveal reveal-delay-4">
+      <span class="eq">OEE = 84% × 78% × 95% = 62%</span><br>
+      <span style="font-size:0.82rem">Subir cada um desses três fatores em poucos pontos move o OEE total de forma multiplicativa.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AI VISION ============ -->
+<section class="aivision-section" id="aivision">
+  <div class="section-inner">
+    <div class="av-pill reveal">● Outros produtos Cogtive</div>
+    <h2 class="section-title reveal reveal-delay-1">Além do core: <span style="color:var(--accent-purple)">AI Vision</span> e <span style="color:var(--accent-teal)">Taelor</span>.</h2>
+    <p class="section-desc reveal reveal-delay-2">Djalma, assim que a base de OEE + Timeline estiver rodando na Texsa, dois produtos adicionais somam a esse alicerce — AI Vision na paletização e Taelor como IA operacional analisando os dados em tempo real.</p>
+
+    <div class="av-grid">
+      <div class="av-photo-wrap reveal reveal-delay-1">
+        <span class="av-tag" style="background:rgba(139,92,246,0.85);color:white">AI Vision · Frigorífico</span>
+        <img src="AI-Vision-Exemplo-1.png" alt="AI Vision — estações de trabalho em um frigorífico">
+        <div class="av-caption">
+          <h5>Exemplo real: estações de trabalho em um frigorífico</h5>
+          <p>Esta imagem mostra a AI Vision aplicada nas estações de trabalho de um frigorífico cliente da Cogtive — câmeras geram indicadores por estação, sem identificar pessoas. Na Texsa, o mesmo princípio se aplica à paletização: baldes/tambores contados, tempo ocioso por ponto e ritmo do turno.</p>
+        </div>
+      </div>
+      <div class="av-photo-wrap reveal reveal-delay-2">
+        <span class="av-tag" style="background:rgba(20,184,166,0.85);color:white">Taelor</span>
+        <img src="taelor.png" alt="Taelor — IA Operacional">
+        <div class="av-caption">
+          <h5>Decisões operacionais por IA</h5>
+          <p>O Taelor analisa os dados de OEE e sugere ações: melhor sequência de envase entre SKUs de 1L, 4L, 20L e tambor, previsão de manutenção e alertas preditivos antes da parada.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="av-rule reveal reveal-delay-3">
+      <div class="av-rule-icon">💡</div>
+      <div>
+        <h5>ROTEIRO SUGERIDO PARA A TEXSA</h5>
+        <p><strong>Fase 1:</strong> OEE + Timeline + Pareto/Smart Setup — visibilidade das 8 envases, misturadores e tanques. <strong>Fase 2:</strong> AI Vision na paletização. <strong>Fase 3:</strong> Taelor sugerindo sequenciamento de SKU e antecipando manutenção. Cada fase paga a próxima.</p>
+      </div>
+    </div>
+
+    <div class="av-capabilities">
+      <div class="av-cap reveal reveal-delay-1">
+        <div class="cap-icon">📸</div>
+        <h6>AI Vision — Estação automática</h6>
+        <p>Indicadores de produtividade por estação. Detecção de ocioso. Sem reconhecimento facial. Monitora a estação, não o operador.</p>
+      </div>
+      <div class="av-cap reveal reveal-delay-2">
+        <div class="cap-icon">🤖</div>
+        <h6>Taelor — IA operacional</h6>
+        <p>Análise automática de OEE. Sugestão de sequência de produção. Alertas preditivos antes que a manutenção vire parada longa.</p>
+      </div>
+      <div class="av-cap reveal reveal-delay-3">
+        <div class="cap-icon">🔗</div>
+        <h6>Integração nativa</h6>
+        <p>OEE, Timeline, AI Vision e Taelor no mesmo painel. Dados que se conversam. Sem silos, sem ERP novo, sem refazer planilha.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ROI ============ -->
+<section class="roi-section" id="roi">
+  <div class="section-inner">
+    <div class="section-label reveal">Retorno Financeiro</div>
+    <h2 class="section-title reveal reveal-delay-1">Quanto vale tirar a capacidade escondida do esconderijo?</h2>
+    <p class="section-desc reveal reveal-delay-2">Para você ter ordem de grandeza, Djalma, abaixo um cenário hipotético do segmento de tintas que serve como benchmark análogo — a mesma lógica se aplica ao seu envase de lubrificantes.</p>
+
+    <div class="roi-grid">
+      <div class="roi-pillars">
+        <div class="roi-pillar reveal reveal-delay-1">
+          <div class="p-icon">📈</div>
+          <div><h5>+12 pontos de OEE</h5><p>Ganho típico no primeiro ano, vindo de redução de microparadas + setup mais rápido + menos parada de fim de turno.</p></div>
+        </div>
+        <div class="roi-pillar reveal reveal-delay-2">
+          <div class="p-icon">⏱️</div>
+          <div><h5>Redução de setup</h5><p>Smart Setup mede e padroniza o tempo de troca. Em envase de múltiplos SKUs (1L, 4L, 20L, tambor) isso é capacidade pura.</p></div>
+        </div>
+        <div class="roi-pillar reveal reveal-delay-3">
+          <div class="p-icon">🔍</div>
+          <div><h5>Pareto automático</h5><p>O sistema entrega a lista das 3 piores causas de parada por linha. Você ataca o que dói mais, primeiro.</p></div>
+        </div>
+        <div class="roi-pillar reveal reveal-delay-4">
+          <div class="p-icon">📊</div>
+          <div><h5>Zero apontamento manual</h5><p>Tira o caderno e o radio do supervisor. Dado entra direto do chão de fábrica.</p></div>
+        </div>
+      </div>
+
+      <div class="roi-total reveal reveal-delay-2">
+        <div class="r-label">Cenário hipotético · Tintas</div>
+        <div class="r-headline">120 baldes/hora × +12 pts OEE</div>
+        <div class="r-equation">
+          <div class="r-term">~6.000 baldes/mês a mais</div>
+          <div class="r-op">=</div>
+          <div class="r-term">R$ 107 mil/mês</div>
+        </div>
+        <div class="r-result">Payback: 15 dias paga o projeto anual</div>
+        <p class="r-note">Esses números são de um cenário hipotético do segmento de tintas, mas a lógica é a mesma para os seus 8 envases de lubrificantes — quanto da sua capacidade está escondida e quanto vale tirar do esconderijo?</p>
+      </div>
+    </div>
+
+    <div class="roi-context reveal reveal-delay-3">
+      <strong>Como ler esse cenário aplicado à Texsa:</strong> a mesma matemática aplicada a uma linha de envase de 1L de lubrificante automotivo, multiplicada pelas 8 linhas que você opera, gera uma ordem de grandeza de capacidade recuperável que só fica visível depois que a Cogtive entra e começa a medir. Por isso a Deise quer fazer a visita presencial: para a gente desenhar esse cálculo com os seus números reais — não os de tinta.
+  </div>
+  </div>
+</section>
+
+<!-- ============ JOURNEY ============ -->
+<section id="journey">
+  <div class="section-inner">
+    <div class="section-label reveal">A Jornada</div>
+    <h2 class="section-title reveal reveal-delay-1">Como a Cogtive entra na Texsa.</h2>
+    <p class="section-desc reveal reveal-delay-2">Implementação por fases, sem parar máquina, com entrega de valor já nas primeiras semanas.</p>
+
+    <div class="journey-steps">
+      <div class="journey-step reveal reveal-delay-1">
+        <div class="journey-num">FASE 01</div>
+        <div class="j-time">Semana 1-2</div>
+        <h4>Diagnóstico in loco</h4>
+        <p>Visita presencial à fábrica conforme você pediu. Mapeamos as 8 envases, misturadores e tanques. Definimos sensores não-intrusivos e pontos de integração com o ERP atual.</p>
+      </div>
+      <div class="journey-step reveal reveal-delay-2">
+        <div class="journey-num">FASE 02</div>
+        <div class="j-time">Semana 3-6</div>
+        <h4>Implementação</h4>
+        <p>Instalação dos coletores nas linhas, configuração do OEE em tempo real e da Timeline. Nenhuma máquina para. Sem impacto na produção.</p>
+      </div>
+      <div class="journey-step reveal reveal-delay-3">
+        <div class="journey-num">FASE 03</div>
+        <div class="j-time">Semana 7-8</div>
+        <h4>Go-live + treinamento</h4>
+        <p>Operadores e supervisores treinados. Dashboards no celular, na sala de gestão e no chão. Primeiros relatórios de microparadas começam a sair.</p>
+      </div>
+      <div class="journey-step reveal reveal-delay-4">
+        <div class="journey-num">FASE 04</div>
+        <div class="j-time">Mês 3 em diante</div>
+        <h4>Ciclo contínuo</h4>
+        <p>Pareto mensal, planos de ação por linha, acompanhamento dos pontos de OEE ganhos. Customer Success da Cogtive acompanha a Texsa em ritmo contínuo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta-section" id="cta">
+  <div class="section-inner">
+    <div class="cta-eyebrow reveal">Próximo passo</div>
+    <h2 class="reveal reveal-delay-1">Vamos marcar a <span class="highlight">visita à fábrica</span>, Djalma?</h2>
+    <p class="reveal reveal-delay-2">Você falou para a Deise que assim que as conversas iniciais avançassem, queria receber o time presencialmente em São Paulo. É exatamente este o próximo passo: a Deise vai à Texsa, conhecemos o processo por dentro e voltamos com uma proposta desenhada para a realidade real da operação — não para o cenário hipotético da apresentação.</p>
+
+    <div class="cta-logos reveal reveal-delay-3">
+      <img src="Cogtive_Logo_Off_White.png" alt="Cogtive">
+      <span class="x">×</span>
+      <img src="texsa-logo.png" alt="Texsa do Brasil" onerror="this.outerHTML='<span class=&quot;lead-mark&quot;>TEXSA</span>'">
+    </div>
+
+    <a href="https://wa.me/5511910776523?text=Oi%20Deise%2C%20vim%20da%20apresenta%C3%A7%C3%A3o%20Cogtive%20para%20agendar%20a%20visita%20%C3%A0%20Texsa." class="cta-button reveal reveal-delay-4" target="_blank" rel="noopener">
+      <span class="wpp-icon">💬</span>
+      Agendar visita à fábrica · Falar com Deise
+    </a>
+    <div class="cta-exec reveal reveal-delay-5"><strong>Deise Bernardo</strong> · Executiva Cogtive · (11) 91077-6523</div>
+
+    <div class="cta-foot">© Cogtive · Apresentação preparada exclusivamente para Texsa do Brasil · Maio 2026</div>
+  </div>
+</section>
+
+</div><!-- /#app -->
+
+<script>
+// ============ AUTH ============
+const AUTH = {
+  authorizedEmail: 'quimico@texsadobrasil.com.br',
+  defaultPassword: 'Cogtive123',
+  masterPassword: 'Cog2026',
+  storageKey: 'cogtive_texsa_pwd_v1',
+  sessionKey: 'cogtive_texsa_auth_v1'
+};
+function getPwd(){ try{return localStorage.getItem(AUTH.storageKey) || AUTH.defaultPassword}catch(e){return AUTH.defaultPassword} }
+function setPwd(p){ try{localStorage.setItem(AUTH.storageKey,p)}catch(e){} }
+function resetPwd(){ try{localStorage.removeItem(AUTH.storageKey)}catch(e){} }
+function isAuthed(){ try{return sessionStorage.getItem(AUTH.sessionKey)==='1'}catch(e){return false} }
+function markAuthed(){ try{sessionStorage.setItem(AUTH.sessionKey,'1')}catch(e){} }
+function clearAuth(){ try{sessionStorage.removeItem(AUTH.sessionKey)}catch(e){} }
+
+const $login = document.getElementById('loginOverlay');
+const $app = document.getElementById('app');
+const $loginForm = document.getElementById('loginForm');
+const $loginErr = document.getElementById('loginError');
+
+function showApp(){
+  $login.style.display='none';
+  $app.classList.remove('hidden');
+  document.body.classList.remove('locked');
+  initApp();
+}
+function showLogin(){
+  $login.style.display='flex';
+  $app.classList.add('hidden');
+  document.body.classList.add('locked');
+}
+
+if(isAuthed()) showApp(); else showLogin();
+
+$loginForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+  const pwd = document.getElementById('loginPwd').value;
+  if(email !== AUTH.authorizedEmail.toLowerCase()){
+    $loginErr.textContent = '⚠ E-mail não autorizado para esta apresentação.';
+    return;
+  }
+  if(pwd !== getPwd()){
+    $loginErr.textContent = '⚠ Senha incorreta.';
+    return;
+  }
+  $loginErr.textContent = '';
+  markAuthed();
+  showApp();
+});
+
+document.addEventListener('click', e => {
+  if(e.target && e.target.id === 'logoutBtn'){
+    clearAuth();
+    location.reload();
+  }
+});
+
+// ============ ADMIN PANEL ============
+const $admin = document.getElementById('adminOverlay');
+const $adminMaster = document.getElementById('adminMaster');
+const $adminTools = document.getElementById('adminTools');
+const $adminCurrent = document.getElementById('adminCurrent');
+const $adminNewPwd = document.getElementById('adminNewPwd');
+const $adminUnlockStatus = document.getElementById('adminUnlockStatus');
+const $adminSaveStatus = document.getElementById('adminSaveStatus');
+
+function openAdmin(){
+  $admin.classList.add('visible');
+  $adminMaster.value = '';
+  $adminTools.style.display = 'none';
+  $adminUnlockStatus.textContent = '';
+  $adminUnlockStatus.className = 'admin-status';
+  setTimeout(()=>$adminMaster.focus(), 100);
+}
+function closeAdmin(){ $admin.classList.remove('visible'); }
+
+document.getElementById('adminCloseBtn').addEventListener('click', closeAdmin);
+document.addEventListener('keydown', e => {
+  if(e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')){
+    e.preventDefault();
+    openAdmin();
+  }
+  if(e.key === 'Escape' && $admin.classList.contains('visible')) closeAdmin();
+});
+
+document.getElementById('adminUnlockBtn').addEventListener('click', () => {
+  if($adminMaster.value === AUTH.masterPassword){
+    $adminUnlockStatus.textContent = '✓ Acesso liberado';
+    $adminUnlockStatus.className = 'admin-status ok';
+    $adminCurrent.textContent = getPwd();
+    $adminTools.style.display = 'block';
+  } else {
+    $adminUnlockStatus.textContent = '✗ Senha-mestra incorreta';
+    $adminUnlockStatus.className = 'admin-status err';
+  }
+});
+document.getElementById('adminSaveBtn').addEventListener('click', () => {
+  const v = $adminNewPwd.value.trim();
+  if(!v){ $adminSaveStatus.textContent = '⚠ Informe uma senha.'; $adminSaveStatus.className='admin-status err'; return; }
+  setPwd(v);
+  $adminCurrent.textContent = v;
+  $adminNewPwd.value = '';
+  $adminSaveStatus.textContent = '✓ Senha atualizada.';
+  $adminSaveStatus.className = 'admin-status ok';
+});
+document.getElementById('adminResetBtn').addEventListener('click', () => {
+  resetPwd();
+  $adminCurrent.textContent = AUTH.defaultPassword;
+  $adminSaveStatus.textContent = '✓ Restaurada para o padrão.';
+  $adminSaveStatus.className = 'admin-status ok';
+});
+
+// ============ APP INIT ============
+function initApp(){
+  // PARTICLES
+  const pBox = document.getElementById('particles');
+  if(pBox && pBox.children.length === 0){
+    for(let i=0;i<28;i++){
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = 2 + Math.random()*4;
+      p.style.width = size+'px'; p.style.height = size+'px';
+      p.style.left = (Math.random()*100)+'%';
+      p.style.animationDuration = (16 + Math.random()*16)+'s';
+      p.style.animationDelay = (Math.random()*22)+'s';
+      pBox.appendChild(p);
+    }
+  }
+
+  // PROGRESS BAR
+  const $pb = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    $pb.style.width = (h>0 ? (window.scrollY / h * 100) : 0) + '%';
+  });
+
+  // REVEAL + COUNT-UP + GAUGES + TIMELINE + TANKS + FLOW
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if(!en.isIntersecting) return;
+      const el = en.target;
+      el.classList.add('active');
+
+      // count up numbers
+      el.querySelectorAll('[data-count]').forEach(n => {
+        if(n.dataset.done) return; n.dataset.done = '1';
+        const tgt = parseFloat(n.dataset.count);
+        const isPerc = (n.textContent||'').includes('%');
+        let cur = 0; const step = Math.max(1, Math.ceil(tgt/40));
+        const tick = () => {
+          cur += step;
+          if(cur >= tgt) cur = tgt;
+          n.textContent = Math.round(cur) + (isPerc?'%':'');
+          if(cur < tgt) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      });
+
+      // gauges
+      el.querySelectorAll('.gauge-fill').forEach(g => {
+        const t = g.dataset.target;
+        if(t) g.setAttribute('stroke-dashoffset', t);
+      });
+
+      // timeline segments
+      el.querySelectorAll('.tl-segment').forEach(s => {
+        const w = s.dataset.w; if(w) s.style.width = w + '%';
+      });
+
+      // tank fills
+      el.querySelectorAll('.tk-fill').forEach(t => {
+        const f = t.dataset.fill; if(f) t.style.height = f + '%';
+      });
+
+      // flow steps progressive
+      if(el.classList.contains('flow-container') || el.querySelector?.('.flow-step')){
+        const steps = el.querySelectorAll('.flow-step');
+        steps.forEach((s,i) => setTimeout(()=>s.classList.add('active'), i*110));
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.reveal, .flow-container, .timeline-visual, .tower-board, .oee-dashboard').forEach(el => io.observe(el));
+  // ensure flow steps trigger
+  document.querySelectorAll('.flow-step').forEach((s,i) => {
+    // observe each row
+  });
+  // direct fallback for flow steps
+  setTimeout(() => {
+    const flowIO = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if(en.isIntersecting){
+          const all = document.querySelectorAll('.flow-step');
+          all.forEach((s,i) => setTimeout(()=>s.classList.add('active'), i*90));
+          flowIO.disconnect();
+        }
+      });
+    }, { threshold: 0.1 });
+    const flow = document.getElementById('flow');
+    if(flow) flowIO.observe(flow);
+  }, 300);
+}
+</script>
+
+</body>
+</html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
